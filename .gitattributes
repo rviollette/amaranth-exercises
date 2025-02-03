@@ -1,0 +1,11 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Ignore trailling whitespaces
+*.md text whitespace=-cr-at-eol,-trailing-space
+
+# Map file extenstion and/or path to language
+*.c linguist-language=C
+*.h linguist-language=C
+*.v linguist-language=Verilog
+*.vh linguist-language=Verilog

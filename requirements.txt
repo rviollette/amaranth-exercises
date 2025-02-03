@@ -1,0 +1,5 @@
+# Amaranth
+amaranth==0.5.1
+amaranth-yosys==0.40.0.post99
+amaranth-soc @ git+https://github.com/amaranth-lang/amaranth-soc.git@9d6bd2c54b4ca28ea4c96cae38edb4c9c3bfdf51
+amaranth-stdio @ git+https://github.com/amaranth-lang/amaranth-stdio.git@f43669d04bb5d5f8c1092ba68087226ec05277ae

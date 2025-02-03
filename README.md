@@ -10,3 +10,21 @@ Work in progress!
 * [05 - Synchronicity: synchronous signals](05_sync.md)
 * [06 - Living in the past: multi-step asserts](06_past.md)
 * [07 - Prove it! Formal verification by induction](07_proof.md)
+
+
+# Kosmos
+
+## Python virtual environment
+
+Detailed setup: [follow this link](https://github.com/Logitech/cpg_kosmos_microblaze/blob/develop/README.md#python-virtual-environment)
+ 
+Manual setup:
+```shell
+python -m venv --upgrade-deps --prompt Amaranth-Exercises .venv
+. ./.venv/bin/activate
+pip install -r requirements.txt
+```
+
+## PyCharm IDE
+After running above commands, open PyCharm, and set the Python interpreter to the one in the virtual environment.  
+It should be named `Amaranth-Exercises` and located in the project directory.
