@@ -1,6 +1,10 @@
+*.il
+*.rtlil
+*.v
+*_bmc/
+*_cover/
+*_prove/
+.idea
+.venv
 .vscode
 __pycache__
-*.il
-*_bmc
-*_cover
-*_prove
