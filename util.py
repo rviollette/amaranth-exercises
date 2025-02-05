@@ -97,7 +97,7 @@ def generate_rtlil(file, elaboratable, name, ports=None, verbose=True):
     verbose and sys.stdout.write(f'{elaboratable.__class__}: {file} ...')
 
     il = rtlil.convert(elaboratable=elaboratable, name=name, ports=ports,
-                       emit_src=False)
+                       emit_src=True)
     file.write_text(il)
 
     verbose and (sys.stdout.write(f' OK\n'), sys.stdout.flush())
