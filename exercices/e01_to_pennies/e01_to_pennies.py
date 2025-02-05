@@ -22,7 +22,7 @@ class CountingCoins(Elaboratable):
 
         # Outputs
         out_val_max = 15*100 + 15*25 + 15*10 + 15*5 + 255
-        self.pennies_out = Signal(range(out_val_max))
+        self.pennies_out = Signal(range(out_val_max+1))
 
     def elaborate(self, _: Platform) -> Module:
         m = Module()
