@@ -27,6 +27,10 @@ class NextDay(Elaboratable):
     def elaborate(self, _: Platform) -> Module:
         m = Module()
 
+        m.d.comb += self.next_year.eq(self.year)
+        m.d.comb += self.next_month.eq(self.month)
+        m.d.comb += self.next_day.eq(self.day)
+
         ### Is leap year
         is_leap_year = Signal()
         with m.If(self.year % 4 == 0):
@@ -47,6 +51,7 @@ class NextDay(Elaboratable):
                 m.d.comb += max_days_in_month.eq(28 + is_leap_year)
             with m.Default():
                 m.d.comb += max_days_in_month.eq(30)
+
 
         ### Invalid signal
         m.d.comb += self.invalid.eq(0)
