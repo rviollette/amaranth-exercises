@@ -1,10 +1,12 @@
 *.il
 *.rtlil
+*.sql*
 *.v
 *_bmc/
 *_cover/
 *_prove/
 .idea
+.sql*
 .venv
 .vscode
 __pycache__
