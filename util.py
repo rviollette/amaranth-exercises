@@ -66,6 +66,8 @@ def generate_verilog(file, elaboratable, name, ports=None, verbose=True):
     :type name: ``str``
     :param ports: Verilog port listing, default to None (when Elaboratable has a Signature) - OPTIONAL
     :type ports: ``None or list or tuple or dict``
+    :param verbose: Toggle verbose mode, default to True - OPTIONAL
+    :type verbose: ``bool``
     """
     verbose and sys.stdout.write(f'{elaboratable.__class__}: {file} ...')
 
@@ -93,12 +95,35 @@ def generate_rtlil(file, elaboratable, name, ports=None, verbose=True):
     :type name: ``str``
     :param ports: Verilog port listing, default to None (when Elaboratable has a Signature) - OPTIONAL
     :type ports: ``None or list or tuple or dict``
+    :param verbose: Toggle verbose mode, default to True - OPTIONAL
+    :type verbose: ``bool``
     """
     verbose and sys.stdout.write(f'{elaboratable.__class__}: {file} ...')
 
     il = rtlil.convert(elaboratable=elaboratable, name=name, ports=ports,
-                       emit_src=False)
+                       emit_src=True)
     file.write_text(il)
 
     verbose and (sys.stdout.write(f' OK\n'), sys.stdout.flush())
 # end def generate_rtlil
+
+
+# def run_formal_verification(sby, rtlil, verbose=True):
+#     """
+#     Run format verification test using `sby` (https://github.com/YosysHQ/sby).
+#     SymbiYosys (sby) is a front-end driver program for Yosys-based formal hardware verification flows.
+#     See https://yosyshq.readthedocs.io/projects/sby/ for documentation on how to use SymbiYosys.
+#
+#     :param sby: SBY file to run
+#     :type sby: ``Path``
+#     :param rtlil: RTLIL file to use
+#     :type rtlil: ``Path``
+#     :param verbose: Toggle verbose mode, default to True - OPTIONAL
+#     :type verbose: ``bool``
+#     """
+#     verbose and sys.stdout.write(f'Format Verification on {rtlil}: ...')
+#
+#     call(f'sby -f {sby} {rtlil}', shell=True)
+#
+#     verbose and (sys.stdout.write(f' OK\n'), sys.stdout.flush())
+# # end def run_formal_verification

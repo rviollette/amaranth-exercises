@@ -10,6 +10,8 @@ from amaranth.hdl import Assume, Assert, Cover
 from util import generate_rtlil
 from util import generate_verilog
 
+from amaranth.cli import main
+
 
 class NextDay(Elaboratable):
     """Logic for NextDay module."""
