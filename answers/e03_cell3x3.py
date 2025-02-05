@@ -58,3 +58,4 @@ class Cell3x3(Elaboratable):
 
 if __name__ == "__main__":
     main(Cell3x3)
+ #   Cell3x3.formal()
