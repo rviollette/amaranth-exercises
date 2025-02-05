@@ -88,6 +88,12 @@ class NextDay(Elaboratable):
 
         null_output = ((dut.next_year == 0) | (dut.next_month == 0) | (dut.next_day == 0))
 
+
+
+        with m.If((dut.month == 0) | (dut.month == 13)):
+            m.d.comb += Assert(dut.invalid)
+
+
         # Prove an all zero numeric output always happens with invalid.
         m.d.comb += Assert(dut.invalid == null_output)
 
