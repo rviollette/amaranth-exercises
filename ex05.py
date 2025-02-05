@@ -1,8 +1,10 @@
 # Disable pylint's "your name is too short" warning.
 # pylint: disable=C0103
+from pathlib import Path
 from typing import List, Tuple
 
 from amaranth import Signal, Module, Elaboratable
+from amaranth import ClockSignal, ResetSignal
 from amaranth.build import Platform
 from amaranth.hdl import Assume, Assert, Cover
 
@@ -16,17 +18,22 @@ class MyClass(Elaboratable):
     """
 
     def __init__(self):
-        # Inputs
-        self.my_input = Signal()
-
         # Outputs
-        self.my_output = Signal()
+        self.my_output = Signal(4, reset=1)
 
     def elaborate(self, _: Platform) -> Module:
         """Implements the logic for my module."""
         m = Module()
 
-        m.d.comb += self.my_output.eq(self.my_input)
+        counter = Signal(4, reset=1)
+
+        m.d.sync += counter.eq(counter + 1)
+        with m.If(counter == 0):
+            m.d.sync += counter.eq(1)
+        with m.If(counter > 9):
+            m.d.sync += counter.eq(1)
+
+        m.d.sync += self.my_output.eq(counter)
 
         return m
 
@@ -37,14 +44,18 @@ class MyClass(Elaboratable):
         m.submodules.my_class = my_class = cls()
 
         # Make sure that the output is always the same as the input
-        m.d.comb += Assert(my_class.my_input == my_class.my_output)
+        m.d.comb += Assert((my_class.my_output >= 1) & (my_class.my_output <= 9))
 
-        # Cover the case where the output is 1.
-        m.d.comb += Cover(my_class.my_output == 1)
+        # Cover the case where the output is 3.
+        m.d.comb += Cover(my_class.my_output == 3)
 
-        return m, [my_class.my_input]
+
+        # Ensure sync's clock and reset signals are manipulable.
+        return m, []
 
 
 if __name__ == "__main__":
-    generate_verilog("toplevel.v", MyClass, "skelet")
+    elab = MyClass()
+    ports = [elab.my_output]
+    generate_verilog(Path("toplevel.v"), elab, "skelet", ports=ports)
     main(MyClass)

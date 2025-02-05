@@ -24,7 +24,7 @@ module \$dff (CLK, D, Q);
 endmodule
 END
 design -stash dff2ff
-read_ilang toplevel.il
+read_rtlil toplevel.il
 proc
 techmap -map %dff2ff top/w:clk %co
 prep -top top
