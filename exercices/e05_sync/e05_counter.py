@@ -44,6 +44,9 @@ class Counter(Elaboratable):
         # Cover the case where output is 3
         m.d.comb += Cover(dut.count_output == 3)
 
+        # Check overflow
+        m.d.sync += Assert()
+
         return m, dut.ports
 
 if __name__ == "__main__":
