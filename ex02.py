@@ -77,7 +77,7 @@ class MyClass(Elaboratable):
             m.d.comb += self.next_year.eq(self.year + 1)
 
         with m.If((self.year < 1) | (self.year > 9999) |
-                  (self.month < 1) | (self.month > 12) | 
+                  (self.month < 1) | (self.month > 12) |
                   (self.day < 1) | (self.day > last_day)):
             m.d.comb += self.invalid.eq(1)
 
@@ -113,11 +113,14 @@ class MyClass(Elaboratable):
 
         m.d.comb += Cover((my_class.day == 31) &
                           (my_class.month == 12) &
-                          (my_class.next_month == 1))
+                          (my_class.next_month == 1)
+                          )
+
 
         m.d.comb += Cover((my_class.day == 29) &
                           (my_class.month == 2) &
-                          (my_class.invalid == 1))
+                          (my_class.invalid == 1)
+                          )
 
         return m, [my_class.day, my_class.month, my_class.year]
 

@@ -30,7 +30,7 @@ class MyClass(Elaboratable):
         m.d.sync += counter.eq(counter + 1)
         with m.If(counter == 0):
             m.d.sync += counter.eq(1)
-        with m.If(counter > 9):
+        with m.If(counter >= 9):
             m.d.sync += counter.eq(1)
 
         m.d.sync += self.my_output.eq(counter)
